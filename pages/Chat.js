@@ -1,149 +1,137 @@
-import {View, Text, FlatList, TextInput, Image} from "react-native";
+import {View, Text, FlatList, Image, TouchableOpacity} from "react-native";
 import * as React from "react";
 import {StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 
-const chatData = [
-    { id: '1', message: 'Hi there!', sender: 'user' },
-    { id: '2', message: 'Hello!', sender: 'friend' },
-    { id: '3', message: 'How are you?', sender: 'user' },
-    { id: '4', message: 'I am good, thanks!', sender: 'friend' },
-    { id: '5', message: 'What have you been up to?', sender: 'friend' },
-    { id: '6', message: 'Not much, just working.', sender: 'user' },
-    { id: '7', message: 'Sounds good!', sender: 'friend' },
-    { id: '8', message: 'See you later!', sender: 'user' },
-    { id: '9', message: 'Bye!', sender: 'friend' },
-    { id: '10', message: 'Bye!', sender: 'user' },
-    { id: '11', message: 'Bye!', sender: 'friend' },
-    { id: '12', message: 'Bye!', sender: 'user' },
-    { id: '13', message: 'Bye!', sender: 'friend' },
-    { id: '14', message: 'Bye!', sender: 'user' },
-    { id: '15', message: 'Bye!', sender: 'friend' },
-];
-
 const Chat = () => {
+    const chatData = [
+        {
+            id: '1',
+            name: 'John Doe',
+            image: 'https://cdn.pixabay.com/photo/2023/10/12/12/54/woman-8310746_1280.jpg',
+            lastMessage: 'Hello, how are you?',
+            timestamp: '3 mins ago',
+        },
+        {
+            id: '2',
+            name: 'Lily',
+            image: 'https://cdn.pixabay.com/photo/2023/01/11/20/27/woman-7712737_1280.jpg',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        },
+        {
+            id: '3',
+            name: 'Michael',
+            image: 'https://cdn.pixabay.com/photo/2014/12/16/22/25/woman-570883_1280.jpg',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        },
+        {
+            id: '4',
+            name: 'Lumen',
+            image: 'https://cdn.pixabay.com/photo/2017/05/11/08/48/woman-2303361_1280.jpg',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        },
+        {
+            id: '5',
+            name: 'Prayog Boedihartoyo',
+            image: 'https://media.istockphoto.com/id/1359069231/id/foto/wanita-muda-asia-yang-cantik-dengan-kulit-segar-bersih-dengan-latar-belakang-putih-perawatan.jpg?s=612x612&w=0&k=20&c=iHlCR3rmuT3NnuQhInRR2Z-qDeYgaGy516oEpg5vnWg=',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        },
+        {
+            id: '6',
+            name: 'Jessica',
+            image: 'https://media.istockphoto.com/id/1278139568/id/foto/potret-studio-wanita-berusia-20-tahun.jpg?s=2048x2048&w=is&k=20&c=2JLQfZbrQ6uLRIfCuJaPsScIAESr3U3fBqmDMF5m6Nc=',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        },
+        {
+            id: '7',
+            name: 'Barron',
+            image: 'https://media.istockphoto.com/id/953282064/id/foto/wanita-cantik-muda-tersenyum.jpg?s=2048x2048&w=is&k=20&c=ppRbbl_tXuNepH5A51nUGRe13wdmML7foIjsqEHmLaQ=',
+            lastMessage: 'I am doing great, thanks!',
+            timestamp: '5 mins ago',
+        }
+    ];
+
     return (
-        <View style={styles.container}>
-            {/*Header */}
+        <View>
             <View style={styles.header}>
-                <View style={styles.profileContainer}>
-                    <Image
-                        source={require('../assets/charlesdeluvio-Mv9hjnEUHR4-unsplash.jpg')}
-                        style={styles.profileImage}
-                    />
-                </View>
-                <Text style={styles.headerText}>Michael</Text>
-                <View style={styles.called}>
-                    <Ionicons name="call" size={24} color="#2C2A29" />
-                </View>
-                <View style={styles.callvideo}>
-                    <Ionicons name="videocam" size={28} color="#2C2A29" />
+                <Text style={styles.textChat}>Chats</Text>
+                <View style={styles.iconHeader}>
+                    <Ionicons name={'camera'} size={24} color={'#fff'} />
+                    <Ionicons name={'search'} size={24} color={'#fff'} />
+                    <Ionicons name={'ellipsis-vertical'} size={24} color={'#fff'} />
                 </View>
             </View>
-
-            {/*Messages */}
             <FlatList
                 data={chatData}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <View
-                        style={[
-                            styles.messageContainer,
-                            item.sender === 'user' ? styles.userMessage : styles.friendMessage,
-                        ]}>
-                        <Text style={styles.messageText}>{item.message}</Text>
-                    </View>
+                    <TouchableOpacity>
+                        <View style={styles.chatItem}>
+                            <Image source={{ uri: item.image }} style={styles.profileImage} />
+                            <View style={styles.chatDetails}>
+                                <Text style={styles.name}>{item.name}</Text>
+                                <Text style={styles.lastMessage}>{item.lastMessage}</Text>
+                            </View>
+                            <Text style={styles.timestamp}>{item.timestamp}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )}
             />
-
-            {/*Input */}
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Type a message..."
-                    placeholderTextColor="#aaaaaa"
-                />
-                <View style={styles.send}>
-                    <Ionicons name="paper-plane" size={28} color="#2C2A29" />
-                </View>
-            </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    callvideo: {
-        marginRight: 10,
-        marginTop: 7,
-        marginLeft: 10,
-    },
-    send: {
-        marginLeft: 'auto',
-    },
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    messageContainer: {
-        maxWidth: '80%',
-        padding: 8,
-        borderRadius: 8,
-        marginVertical: 8,
-    },
-    userMessage: {
-        alignSelf: 'flex-end',
-        backgroundColor: '#007BFF',
-        color: 'white',
-    },
-    friendMessage: {
-        alignSelf: 'flex-start',
-        backgroundColor: '#E5E5EA',
-    },
-    messageText: {
-        color: 'black',
-    },
-    header: {
+    iconHeader: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        paddingRight: 10,
-        marginBottom: 16,
-        backgroundColor: '#D7E2E3',
-        borderRadius: 8,
-        padding: 10,
-        width: '100%',
+        paddingLeft: 235,
+        gap: 20,
     },
-    headerText: {
-        textAlign: 'right',
+    textChat: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: 10,
-        marginTop: 10,
+        color: '#fff',
+        alignItems: 'flex-start',
     },
-    inputContainer: {
+    header: {
+        padding: 20,
+        backgroundColor: '#5C6D6F',
+        flexDirection: 'row',
+    },
+    chatItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'white',
         padding: 10,
-        borderRadius: 8,
-        bottom: 0,
-    },
-    profileContainer: {
-        width: 40,
-        height: 40,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 4,
     },
     profileImage: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 20,
-        backgroundColor: 'gray',
-    },
-    called: {
-        marginLeft: 'auto',
-        flexDirection: 'row',
-        marginTop: 7,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
         marginRight: 10,
-    }
+    },
+    chatDetails: {
+        flex: 1,
+    },
+    name: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    lastMessage: {
+        fontSize: 14,
+        color: '#888',
+    },
+    timestamp: {
+        fontSize: 12,
+        color: '#888',
+    },
 });
 
 export default Chat;
