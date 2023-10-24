@@ -2,8 +2,10 @@ import {View, Text, FlatList, Image, TouchableOpacity} from "react-native";
 import * as React from "react";
 import {StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 const Chat = () => {
+    const insets = useSafeAreaInsets();
     const chatData = [
         {
             id: '1',
@@ -57,7 +59,7 @@ const Chat = () => {
     ];
 
     return (
-        <View>
+        <View style={{paddingTop: insets.top}}>
             <View style={styles.header}>
                 <Text style={styles.textChat}>Chats</Text>
                 <View style={styles.iconHeader}>

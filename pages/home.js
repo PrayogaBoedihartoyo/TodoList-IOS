@@ -10,11 +10,12 @@ import {
     View
 } from "react-native";
 import Task from "../components/Task";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 const Home = () => {
     const [task, setTask] = React.useState();
     const [taskItems, setTaskItems] = React.useState([]);
-
+    const insets = useSafeAreaInsets();
     const handleAddTask = () => {
         Keyboard.dismiss();
 
@@ -29,7 +30,7 @@ const Home = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, paddingTop: insets.top}}>
             {/* TODAY'S TASK */}
             <View style={styles.taskWrapper}>
                 <Text style={styles.sectionTitle}>Today's Task</Text>

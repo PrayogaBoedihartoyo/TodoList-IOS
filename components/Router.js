@@ -3,15 +3,12 @@ import {Ionicons} from "@expo/vector-icons";
 import Chat from "../pages/Chat";
 import SettingsScreen from "../pages/Settings";
 import Profile from "../pages/Profile";
-import {NavigationContainer} from "@react-navigation/native";
 import * as React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
-
 const Router = () => {
     return (
-        <NavigationContainer>
-            <Tab.Navigator>
+            <Tab.Navigator screenOptions={{headerShown: false}}>
                 <Tab.Screen
                     name="Home"
                     component={Home}
@@ -49,8 +46,7 @@ const Router = () => {
                     }}
                 />
             </Tab.Navigator>
-        </NavigationContainer>
-    )
+    );
 }
 
 export default Router;
