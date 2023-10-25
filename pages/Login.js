@@ -42,20 +42,12 @@ const LoginScreen = () => {
                 style={styles.input}
                 placeholder="Username"
                 onChangeText={text => setUsername(text)}
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                    passwordInput.focus();
-                }}
             />
             <TextInput
-                ref={(input) => {
-                    let passwordInput = input;
-                }}
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry
                 onChangeText={text => setPassword(text)}
-                returnKeyType="go"
                 onSubmitEditing={handleLogin}
             />
             <View style={styles.button}>
