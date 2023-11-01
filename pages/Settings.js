@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, Switch, StyleSheet, TouchableOpacity } from 'react-native';
-import {useSafeAreaInsets} from "react-native-safe-area-context";
-
 const SettingsScreen = () => {
-    const inset = useSafeAreaInsets();
     const [settings, setSettings] = useState([
         { id: '1', title: 'Notifikasi', enabled: true },
         { id: '2', title: 'Tema Gelap', enabled: false },
@@ -28,17 +25,17 @@ const SettingsScreen = () => {
 
     return (
         <View>
-            <View style={{...styles.container, paddingTop: inset.top}}>
+            <View style={styles.taskWrapper}>
+                <Text style={styles.sectionTitle}>Settings</Text>
+            </View>
+            <View style={{...styles.container}}>
                 <FlatList
                     data={settings}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={styles.settingItem}>
                             <Text style={styles.settingTitle}>{item.title}</Text>
-                            <Switch
-                                value={item.enabled}
-                                onValueChange={() => toggleSwitch(item.id)}
-                            />
+                            <Switch value={item.enabled} onValueChange={() => toggleSwitch(item.id)}/>
                         </View>
                     )}
                 />
@@ -53,9 +50,18 @@ const SettingsScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    taskWrapper: {
+        paddingTop: 100,
+        paddingHorizontal: 20,
+        // backgroundColor: '#5C6D6F',
+    },
+    sectionTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
     container: {
-        height: '76%',
         padding: 16,
+        // backgroundColor: 'red',
     },
     settingItem: {
         flexDirection: 'row',
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         marginHorizontal: 16,
-        marginTop: 150,
+        marginTop: 120,
     },
     signOutText: {
         color: 'white',
