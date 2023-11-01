@@ -9,6 +9,11 @@ const SettingsScreen = () => {
         { id: '2', title: 'Tema Gelap', enabled: false },
         { id: '3', title: 'Privasi', enabled: true },
         { id: '4', title: 'Bantuan', enabled: false },
+        { id: '5', title: 'Tentang', enabled: true },
+        { id: '6', title: 'Versi', enabled: false },
+        { id: '7', title: 'Kirimkan Umpan Balik', enabled: true },
+        { id: '8', title: 'Laporan Masalah', enabled: false },
+        { id: '9', title: 'Kebijakan Privasi', enabled: true },
     ]);
 
     const toggleSwitch = (id) => {
@@ -22,30 +27,34 @@ const SettingsScreen = () => {
     };
 
     return (
-        <View style={{...styles.container, paddingTop: inset.top}}>
-            <FlatList
-                data={settings}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.settingItem}>
-                        <Text style={styles.settingTitle}>{item.title}</Text>
-                        <Switch
-                            value={item.enabled}
-                            onValueChange={() => toggleSwitch(item.id)}
-                        />
-                    </View>
-                )}
-            />
-            <TouchableOpacity style={styles.signOutButton}>
-                <Text style={styles.signOutText}>Keluar</Text>
-            </TouchableOpacity>
+        <View>
+            <View style={{...styles.container, paddingTop: inset.top}}>
+                <FlatList
+                    data={settings}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.settingItem}>
+                            <Text style={styles.settingTitle}>{item.title}</Text>
+                            <Switch
+                                value={item.enabled}
+                                onValueChange={() => toggleSwitch(item.id)}
+                            />
+                        </View>
+                    )}
+                />
+            </View>
+            <View>
+                <TouchableOpacity style={styles.signOutButton}>
+                    <Text style={styles.signOutText}>Keluar</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '76%',
         padding: 16,
     },
     settingItem: {
@@ -63,8 +72,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         padding: 12,
         borderRadius: 8,
-        marginTop: 20,
         alignItems: 'center',
+        marginHorizontal: 16,
+        marginTop: 150,
     },
     signOutText: {
         color: 'white',
